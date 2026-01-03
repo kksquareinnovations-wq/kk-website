@@ -100,7 +100,7 @@ export default function PortfolioBalanceMonitor() {
               <div>
                 <h3 className="text-lg font-bold text-white mb-2">Install the Extension</h3>
                 <p className="text-slate-300">
-                  Search for "Portfolio Balance Monitor" in the VS Code Extensions marketplace and click Install.
+                  Search for &quot;Portfolio Balance Monitor&quot; in the VS Code Extensions marketplace and click Install.
                 </p>
               </div>
             </div>
@@ -114,7 +114,7 @@ export default function PortfolioBalanceMonitor() {
               <div>
                 <h3 className="text-lg font-bold text-white mb-2">Connect Your Broker Account</h3>
                 <p className="text-slate-300">
-                  Open the extension settings and authenticate with your Robinhood or other supported broker. You'll be redirected to their secure login.
+                  Open the extension settings and authenticate with your Robinhood or other supported broker. You&apos;ll be redirected to their secure login.
                 </p>
               </div>
             </div>
@@ -191,7 +191,7 @@ export default function PortfolioBalanceMonitor() {
                 <span className="ml-auto text-slate-400 group-open:rotate-180 transition">▼</span>
               </summary>
               <p className="p-6 text-slate-300">
-                The extension caches your last balance locally. Once you're back online, it will update automatically.
+                The extension caches your last balance locally. Once you&apos;re back online, it will update automatically.
               </p>
             </details>
 

@@ -144,7 +144,7 @@ export default function Home() {
             <div className="text-4xl mb-4">⚡</div>
             <h3 className="text-xl font-bold text-white mb-3">Fast & Efficient</h3>
             <p className="text-slate-400">
-              Lightweight extensions that don't slow down your workflow while providing real-time data.
+              Lightweight extensions that don&apos;t slow down your workflow while providing real-time data.
             </p>
           </div>
           <div className="text-center">
@@ -169,7 +169,7 @@ export default function Home() {
         <div className="text-center mb-12">
           <h2 className="text-3xl font-bold text-white mb-8">Support Our Non-Profit Mission</h2>
           <p className="text-slate-300 text-lg mb-10 max-w-2xl mx-auto">
-            We're dedicated to making financial tools accessible to developers everywhere. Your support helps us continue building amazing extensions and maintaining our community.
+            We&apos;re dedicated to making financial tools accessible to developers everywhere. Your support helps us continue building amazing extensions and maintaining our community.
           </p>
           
           <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
@@ -237,7 +237,7 @@ export default function Home() {
             <div>
               <h4 className="text-white font-bold mb-3">Support Us</h4>
               <p className="text-slate-400 text-sm">
-                We're a non-profit organization. <a href="#" className="text-cyan-400 hover:text-cyan-300 transition">Donate today</a> to help us grow.
+                We&apos;re a non-profit organization. <a href="#" className="text-cyan-400 hover:text-cyan-300 transition">Donate today</a> to help us grow.
               </p>
             </div>
           </div>

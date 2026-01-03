@@ -145,7 +145,7 @@ export default function InvestmentTrackerPro() {
               <div className="text-3xl mb-3">🚨</div>
               <h3 className="font-bold text-white mb-2">Market Alert System</h3>
               <p className="text-slate-300 text-sm">
-                Receive alerts on holdings you're tracking, and view full performance context right in the tracker.
+                Receive alerts on holdings you&apos;re tracking, and view full performance context right in the tracker.
               </p>
             </div>
           </div>

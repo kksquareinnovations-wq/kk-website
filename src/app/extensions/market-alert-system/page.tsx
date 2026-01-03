@@ -63,7 +63,7 @@ export default function MarketAlertSystem() {
             <div>
               <h3 className="text-xl font-bold text-orange-400 mb-3">📍 Custom Price Alerts</h3>
               <p className="text-slate-300">
-                Set price targets for any stock. Get notified instantly when a stock reaches your target price, whether it's above or below your threshold.
+                Set price targets for any stock. Get notified instantly when a stock reaches your target price, whether it&apos;s above or below your threshold.
               </p>
             </div>
             <div>
