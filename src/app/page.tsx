@@ -74,7 +74,7 @@ export default function Home() {
               Explore Extensions
             </a>
             <a
-              href="https://github.com"
+              href="https://github.com/kksquareinnovations-wq"
               target="_blank"
               rel="noopener noreferrer"
               className="px-8 py-3 border border-slate-500 text-slate-300 rounded-lg font-semibold hover:bg-slate-700 transition"
