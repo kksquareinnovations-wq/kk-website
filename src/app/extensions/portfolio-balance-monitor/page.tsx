@@ -40,13 +40,15 @@ export default function PortfolioBalanceMonitor() {
 
           <div className="flex gap-4">
             <a
-              href="#"
+              href="https://chromewebstore.google.com/detail/niddlfmemgoikmfmhkccjefejcodaljk?utm_source=item-share-cb"
+              target="_blank"
+              rel="noopener noreferrer"
               className="px-6 py-3 bg-gradient-to-r from-green-500 to-emerald-600 text-white rounded-lg font-semibold hover:shadow-lg hover:shadow-green-500/50 transition"
             >
               Install Extension
             </a>
             <a
-              href="https://github.com"
+              href="https://github.com/kksquareinnovations-wq"
               target="_blank"
               rel="noopener noreferrer"
               className="px-6 py-3 border border-slate-500 text-slate-300 rounded-lg font-semibold hover:bg-slate-700 transition"
@@ -214,7 +216,9 @@ export default function PortfolioBalanceMonitor() {
             Install Portfolio Balance Monitor today and never lose focus on your investments again.
           </p>
           <a
-            href="#"
+            href="https://chromewebstore.google.com/detail/niddlfmemgoikmfmhkccjefejcodaljk?utm_source=item-share-cb"
+            target="_blank"
+            rel="noopener noreferrer"
             className="inline-block px-8 py-3 bg-gradient-to-r from-green-500 to-emerald-600 text-white rounded-lg font-semibold hover:shadow-lg hover:shadow-green-500/50 transition"
           >
             Install Now →
