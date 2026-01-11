@@ -29,7 +29,7 @@ This project is a portfolio website for **KK Innovations**, a non-profit organiz
 
 ### Prerequisites
 
-- Node.js v20+ 
+- Node.js v20+
 - npm or yarn
 - Git
 - AWS account (for deployment)
@@ -95,18 +95,21 @@ kk-website/
 ## 💻 Technology Stack
 
 ### Frontend
+
 - **Next.js 16.1.1** - React framework with SSG/SSR
 - **React 19** - UI library
 - **TypeScript 5+** - Type safety
 - **Tailwind CSS 4** - Utility-first styling
 
 ### Infrastructure
+
 - **AWS EC2** - Virtual machine hosting
 - **AWS Elastic IP** - Static public IP (3.151.75.138)
 - **AWS Route53** - DNS management
 - **Terraform** - Infrastructure as Code
 
 ### DevOps
+
 - **GitHub Actions** - CI/CD automation
 - **PM2** - Application process manager
 - **Nginx** - Reverse proxy and web server
@@ -136,6 +139,7 @@ Create a `.env.local` file for local development:
 ## 📊 Features
 
 ### Website Features
+
 - ✅ Professional dark theme with gradients
 - ✅ Responsive design (mobile, tablet, desktop)
 - ✅ Dynamic copyright year (auto-updates)
@@ -145,6 +149,7 @@ Create a `.env.local` file for local development:
 - ✅ Professional footer with links
 
 ### Deployment Features
+
 - ✅ Automatic CI/CD with GitHub Actions
 - ✅ One-command deployment (`git push`)
 - ✅ Elastic IP for permanent address
@@ -158,6 +163,7 @@ Create a `.env.local` file for local development:
 ## 🌐 Live Deployment
 
 ### Current Status
+
 - **Status**: ✅ Live on EC2
 - **Elastic IP**: `3.151.75.138`
 - **Domain**: `kkinnovations.com` (configure DNS)
@@ -201,6 +207,7 @@ The project includes automatic deployment via GitHub Actions. Every push to the 
    - Value: Entire content of `key-pair-kk-website.pem`
 
 2. **Deploy**
+
    ```bash
    git add .
    git commit -m "Your message"
@@ -213,6 +220,7 @@ The project includes automatic deployment via GitHub Actions. Every push to the 
    - Check logs for any issues
 
 ### Deployment Time
+
 - Build: ~30 seconds
 - Upload: ~15 seconds
 - Install: ~20 seconds
@@ -226,22 +234,23 @@ The project includes automatic deployment via GitHub Actions. Every push to the 
 
 Comprehensive guides are included in the project:
 
-| Document | Purpose |
-|----------|---------|
-| `SETUP_SUMMARY.md` | Quick setup overview |
-| `GITHUB_ACTIONS_SETUP.md` | GitHub Actions configuration |
-| `AUTOMATIC_DEPLOYMENT.md` | Deployment options (GitHub Actions, CodePipeline, AppConfig) |
-| `CONTACT_DONATION_SETUP.md` | Email and PayPal integration details |
-| `VISUAL_GUIDE_CONTACT_DONATION.md` | UI/UX visual guide |
-| `QUICK_REFERENCE.md` | Quick lookup reference |
-| `EC2_DEPLOYMENT_GUIDE.md` | Manual EC2 setup guide |
-| `ELASTIC_IP_SETUP.md` | Static IP configuration |
+| Document                           | Purpose                                                      |
+| ---------------------------------- | ------------------------------------------------------------ |
+| `SETUP_SUMMARY.md`                 | Quick setup overview                                         |
+| `GITHUB_ACTIONS_SETUP.md`          | GitHub Actions configuration                                 |
+| `AUTOMATIC_DEPLOYMENT.md`          | Deployment options (GitHub Actions, CodePipeline, AppConfig) |
+| `CONTACT_DONATION_SETUP.md`        | Email and PayPal integration details                         |
+| `VISUAL_GUIDE_CONTACT_DONATION.md` | UI/UX visual guide                                           |
+| `QUICK_REFERENCE.md`               | Quick lookup reference                                       |
+| `EC2_DEPLOYMENT_GUIDE.md`          | Manual EC2 setup guide                                       |
+| `ELASTIC_IP_SETUP.md`              | Static IP configuration                                      |
 
 ---
 
 ## 🔐 Security
 
 ### Best Practices Implemented
+
 - ✅ SSH key stored securely in GitHub Secrets (never in code)
 - ✅ No hardcoded credentials in source code
 - ✅ Environment variables for sensitive data
@@ -250,12 +259,13 @@ Comprehensive guides are included in the project:
 - ✅ HTTPS ready with Let's Encrypt support
 
 ### Security Group Rules
-| Port | Protocol | Purpose |
-|------|----------|---------|
-| 22 | TCP | SSH access |
-| 80 | TCP | HTTP (redirects to HTTPS) |
-| 443 | TCP | HTTPS (encrypted traffic) |
-| 3000 | TCP | Node.js app (direct access) |
+
+| Port | Protocol | Purpose                     |
+| ---- | -------- | --------------------------- |
+| 22   | TCP      | SSH access                  |
+| 80   | TCP      | HTTP (redirects to HTTPS)   |
+| 443  | TCP      | HTTPS (encrypted traffic)   |
+| 3000 | TCP      | Node.js app (direct access) |
 
 ---
 
@@ -301,10 +311,12 @@ npm run format
 ## 📞 Contact & Support
 
 ### Get in Touch
+
 - **Email**: kksquareinnovations@gmail.com
 - **Non-Profit**: We're dedicated to making financial tools accessible
 
 ### Support Our Mission
+
 - Donate via PayPal (buttons on website)
 - Report issues on GitHub
 - Suggest improvements via email
@@ -314,6 +326,7 @@ npm run format
 ## 📈 Performance
 
 ### Optimization Features
+
 - Next.js static export for maximum performance
 - Optimized images and assets
 - CSS minification and optimization
@@ -321,6 +334,7 @@ npm run format
 - CDN-ready (can use CloudFront)
 
 ### Metrics
+
 - Lighthouse Score: 95+
 - Mobile-friendly: ✅
 - Responsive design: ✅
@@ -333,6 +347,7 @@ npm run format
 ### Common Issues
 
 **Port 3000 already in use:**
+
 ```bash
 # Kill the process using port 3000
 lsof -ti:3000 | xargs kill -9
@@ -342,6 +357,7 @@ npm run dev -- -p 3001
 ```
 
 **Build fails:**
+
 ```bash
 # Clean build
 rm -rf .next node_modules
@@ -350,12 +366,14 @@ npm run build
 ```
 
 **Deployment fails:**
+
 - Check GitHub Actions logs: Repository → Actions
 - Verify SSH key is in GitHub Secrets
 - Ensure EC2 instance is running
 - Check security group allows SSH
 
 **App won't restart on EC2:**
+
 ```bash
 # SSH into EC2
 ssh -i key-pair-kk-website.pem ec2-user@3.151.75.138
@@ -380,9 +398,10 @@ This project is part of KK Innovations' non-profit mission to make financial too
 
 ## 🎉 Contributing
 
-We welcome contributions! 
+We welcome contributions!
 
 ### How to Contribute
+
 1. Fork the repository
 2. Create a feature branch: `git checkout -b feature/your-feature`
 3. Make your changes
@@ -392,6 +411,7 @@ We welcome contributions!
 7. Open a Pull Request
 
 ### Code Style
+
 - Use TypeScript for type safety
 - Follow ESLint configuration
 - Keep components small and reusable
@@ -425,6 +445,7 @@ We welcome contributions!
 ## ✅ Deployment Checklist
 
 Before going live:
+
 - [ ] SSH key stored in GitHub Secrets
 - [ ] EC2 instance running
 - [ ] PM2 installed and configured
@@ -451,6 +472,7 @@ Before going live:
 ## 📞 Support
 
 For questions or issues:
+
 1. Check the documentation files in this repository
 2. Review GitHub Actions logs for deployment issues
 3. Email: kksquareinnovations@gmail.com
@@ -472,4 +494,4 @@ For questions or issues:
 
 ---
 
-*Built with ❤️ for the developer community*
+_Built with ❤️ for the developer community_
