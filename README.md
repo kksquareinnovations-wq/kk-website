@@ -1,4 +1,4 @@
-# KK Innovation Portfolio - VS Code Extensions Showcase
+# KK Innovations - VS Code Extensions Showcase
 
 A professional portfolio website showcasing three powerful financial tracking VS Code extensions, built with Next.js, TypeScript, and Tailwind CSS. Fully automated deployment to AWS EC2 with GitHub Actions.
 

@@ -40,13 +40,13 @@ export default function MarketAlertSystem() {
 
           <div className="flex gap-4">
             <a
-              href="#"
+              href="https://chromewebstore.google.com/detail/gbmlndbffemfhlcbddbjflmfmgehjhcf?utm_source=item-share-cb"
               className="px-6 py-3 bg-gradient-to-r from-orange-500 to-red-600 text-white rounded-lg font-semibold hover:shadow-lg hover:shadow-orange-500/50 transition"
             >
               Install Extension
             </a>
             <a
-              href="https://github.com"
+              href="https://github.com/kksquareinnovations-wq"
               target="_blank"
               rel="noopener noreferrer"
               className="px-6 py-3 border border-slate-500 text-slate-300 rounded-lg font-semibold hover:bg-slate-700 transition"

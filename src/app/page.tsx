@@ -43,7 +43,7 @@ export default function Home() {
         <div className="mx-auto max-w-6xl px-6 py-4 flex items-center justify-between">
           <div className="flex items-center gap-2">
             <span className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
-              KK Innovation Portfolio
+              KK Innovations
             </span>
           </div>
           <nav className="flex items-center gap-6">
@@ -223,7 +223,7 @@ export default function Home() {
             <div>
               <h4 className="text-white font-bold mb-3">About</h4>
               <p className="text-slate-400 text-sm">
-                KK Innovation Portfolio provides powerful financial tracking extensions for developers.
+                KK Innovations provides powerful financial tracking extensions for developers.
               </p>
             </div>
             <div>
@@ -242,7 +242,7 @@ export default function Home() {
             </div>
           </div>
           <div className="border-t border-slate-700 pt-8 text-center text-slate-500">
-            <p>&copy; {currentYear} KK Innovation Portfolio. Non-Profit Organization. All rights reserved.</p>
+            <p>&copy; {currentYear} KK Innovations. Non-Profit Organization. All rights reserved.</p>
           </div>
         </div>
       </footer>
