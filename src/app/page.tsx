@@ -1,5 +1,9 @@
 "use client";
 
+import { Header } from "@/components/Header";
+import { Footer } from "@/components/Footer";
+import { ContactForm } from "@/components/ContactForm";
+
 export default function Home() {
   const currentYear = new Date().getFullYear();
 
@@ -52,33 +56,12 @@ export default function Home() {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-black">
-      {/* Header/Navigation */}
-      <header className="sticky top-0 z-50 border-b border-slate-700 bg-slate-900/80 backdrop-blur-md">
-        <div className="mx-auto max-w-6xl px-6 py-4 flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <span className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
-              KK Innovations
-            </span>
-          </div>
-          <nav className="flex items-center gap-6">
-            <a
-              href="#extensions"
-              className="text-slate-300 hover:text-white transition"
-            >
-              Extensions
-            </a>
-            <a
-              href="#about"
-              className="text-slate-300 hover:text-white transition"
-            >
-              About
-            </a>
-          </nav>
-        </div>
-      </header>
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-black flex flex-col">
+      {/* Header with KK Innovations Link */}
+      <Header />
 
-      {/* Hero Section */}
+      {/* Main Content */}
+      <main className="flex-1">
       <section className="mx-auto max-w-6xl px-6 py-20">
         <div className="text-center mb-16">
           <h1 className="text-5xl md:text-6xl font-bold text-white mb-6 leading-tight">
@@ -289,50 +272,13 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="border-t border-slate-700 bg-slate-900/50 py-12">
-        <div className="mx-auto max-w-6xl px-6">
-          <div className="grid md:grid-cols-3 gap-8 mb-8">
-            <div>
-              <h4 className="text-white font-bold mb-3">About</h4>
-              <p className="text-slate-400 text-sm">
-                KK Innovations provides powerful financial tracking extensions
-                for developers.
-              </p>
-            </div>
-            <div>
-              <h4 className="text-white font-bold mb-3">Contact</h4>
-              <p className="text-slate-400 text-sm">
-                <a
-                  href="mailto:kksquareinnovations@gmail.com"
-                  className="hover:text-cyan-400 transition"
-                >
-                  kksquareinnovations@gmail.com
-                </a>
-              </p>
-            </div>
-            <div>
-              <h4 className="text-white font-bold mb-3">Support Us</h4>
-              <p className="text-slate-400 text-sm">
-                We&apos;re a non-profit organization.{" "}
-                <a
-                  href="#"
-                  className="text-cyan-400 hover:text-cyan-300 transition"
-                >
-                  Donate today
-                </a>{" "}
-                to help us grow.
-              </p>
-            </div>
-          </div>
-          <div className="border-t border-slate-700 pt-8 text-center text-slate-500">
-            <p>
-              &copy; {currentYear} KK Innovations. Non-Profit Organization. All
-              rights reserved.
-            </p>
-          </div>
-        </div>
-      </footer>
+      {/* Contact Form Section */}
+      <ContactForm />
+      </main>
+
+      {/* Footer with KK Innovations Links */}
+      <Footer />
     </div>
   );
 }
+
