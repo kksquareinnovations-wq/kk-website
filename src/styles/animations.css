@@ -267,41 +267,41 @@ html {
 
 /* Animation utility classes */
 .animate-entrance-3d {
-  animation: entrance3D 1.2s ease-out forwards;
+  animation: entrance3D 2s ease-out forwards;
 }
 
 .animate-entrance-3d-flip {
-  animation: entrance3DFlip 1.5s ease-out forwards;
+  animation: entrance3DFlip 2.2s ease-out forwards;
 }
 
 .animate-entrance-3d-zoom {
-  animation: entrance3DZoom 1s ease-out forwards;
+  animation: entrance3DZoom 1.8s ease-out forwards;
 }
 
 /* Staggered entrance for multiple elements */
 .entrance-stagger-1 {
-  animation: entrance3D 1.2s ease-out forwards;
+  animation: entrance3D 2s ease-out forwards;
   animation-delay: 0s;
 }
 
 .entrance-stagger-2 {
-  animation: entrance3D 1.2s ease-out forwards;
-  animation-delay: 0.1s;
+  animation: entrance3D 2s ease-out forwards;
+  animation-delay: 0.15s;
 }
 
 .entrance-stagger-3 {
-  animation: entrance3D 1.2s ease-out forwards;
-  animation-delay: 0.2s;
-}
-
-.entrance-stagger-4 {
-  animation: entrance3D 1.2s ease-out forwards;
+  animation: entrance3D 2s ease-out forwards;
   animation-delay: 0.3s;
 }
 
+.entrance-stagger-4 {
+  animation: entrance3D 2s ease-out forwards;
+  animation-delay: 0.45s;
+}
+
 .entrance-stagger-5 {
-  animation: entrance3D 1.2s ease-out forwards;
-  animation-delay: 0.4s;
+  animation: entrance3D 2s ease-out forwards;
+  animation-delay: 0.6s;
 }
 
 /* Performance: reduce animations for users who prefer reduced motion */

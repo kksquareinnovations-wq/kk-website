@@ -12,8 +12,8 @@ export const Header = () => {
   return (
     <>
       <ScrollProgressBar />
-      <header className="sticky top-0 z-50 bg-gradient-to-b from-slate-900/90 to-slate-900/80 backdrop-blur border-b border-blue-500/30 shadow-lg shadow-cyan-500/10">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <header className="sticky top-0 z-40 w-full bg-gradient-to-b from-slate-900/90 to-slate-900/80 backdrop-blur border-b border-blue-500/30 shadow-lg shadow-cyan-500/10">
+      <div className="max-w-6xl mx-auto px-6">
         <div className="flex justify-between items-center h-16">
           {/* Logo / Brand Link */}
           <Link
