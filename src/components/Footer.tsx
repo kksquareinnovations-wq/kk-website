@@ -6,7 +6,7 @@ export const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-slate-950 border-t border-slate-800">
+    <footer className="bg-gradient-to-b from-slate-900 to-slate-950 border-t border-blue-500/30 shadow-lg shadow-blue-500/10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         {/* Footer Top */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
@@ -14,10 +14,10 @@ export const Footer = () => {
           <div>
             <Link
               href="/"
-              className="flex items-center gap-2 font-bold text-lg mb-4 hover:text-blue-400 transition-colors"
+              className="flex items-center gap-2 font-bold text-lg mb-4 hover:text-cyan-400 transition-all duration-300 group"
             >
-              <span className="text-2xl">💡</span>
-              <span className="bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
+              <span className="text-2xl group-hover:scale-110 transition-transform">💡</span>
+              <span className="bg-gradient-to-r from-blue-400 via-cyan-400 to-blue-300 bg-clip-text text-transparent">
                 KK Innovations
               </span>
             </Link>
@@ -28,12 +28,12 @@ export const Footer = () => {
 
           {/* Quick Links */}
           <div>
-            <h3 className="text-white font-semibold mb-4">Quick Links</h3>
+            <h3 className="text-white font-semibold mb-4 bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">Quick Links</h3>
             <ul className="space-y-2">
               <li>
                 <Link
                   href="/"
-                  className="text-slate-400 hover:text-white transition-colors"
+                  className="text-slate-400 hover:text-cyan-400 transition-colors"
                 >
                   Home
                 </Link>
@@ -41,7 +41,7 @@ export const Footer = () => {
               <li>
                 <Link
                   href="/#extensions"
-                  className="text-slate-400 hover:text-white transition-colors"
+                  className="text-slate-400 hover:text-cyan-400 transition-colors"
                 >
                   Extensions
                 </Link>
@@ -49,7 +49,7 @@ export const Footer = () => {
               <li>
                 <Link
                   href="/#about"
-                  className="text-slate-400 hover:text-white transition-colors"
+                  className="text-slate-400 hover:text-cyan-400 transition-colors"
                 >
                   About
                 </Link>
@@ -57,7 +57,7 @@ export const Footer = () => {
               <li>
                 <Link
                   href="/#contact"
-                  className="text-slate-400 hover:text-white transition-colors"
+                  className="text-slate-400 hover:text-cyan-400 transition-colors"
                 >
                   Contact
                 </Link>
@@ -67,12 +67,12 @@ export const Footer = () => {
 
           {/* Extensions */}
           <div>
-            <h3 className="text-white font-semibold mb-4">Extensions</h3>
+            <h3 className="text-white font-semibold mb-4 bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">Extensions</h3>
             <ul className="space-y-2">
               <li>
                 <Link
                   href="/extensions/portfolio-balance-monitor"
-                  className="text-slate-400 hover:text-white transition-colors"
+                  className="text-slate-400 hover:text-cyan-400 transition-colors"
                 >
                   Portfolio Monitor
                 </Link>
@@ -80,7 +80,7 @@ export const Footer = () => {
               <li>
                 <Link
                   href="/extensions/investment-tracker-pro"
-                  className="text-slate-400 hover:text-white transition-colors"
+                  className="text-slate-400 hover:text-cyan-400 transition-colors"
                 >
                   Investment Tracker
                 </Link>
@@ -88,7 +88,7 @@ export const Footer = () => {
               <li>
                 <Link
                   href="/extensions/market-alert-system"
-                  className="text-slate-400 hover:text-white transition-colors"
+                  className="text-slate-400 hover:text-cyan-400 transition-colors"
                 >
                   Market Alerts
                 </Link>
@@ -98,12 +98,12 @@ export const Footer = () => {
 
           {/* Legal */}
           <div>
-            <h3 className="text-white font-semibold mb-4">Legal</h3>
+            <h3 className="text-white font-semibold mb-4 bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">Legal</h3>
             <ul className="space-y-2">
               <li>
                 <a
                   href="#"
-                  className="text-slate-400 hover:text-white transition-colors"
+                  className="text-slate-400 hover:text-cyan-400 transition-colors"
                 >
                   Privacy Policy
                 </a>
@@ -111,7 +111,7 @@ export const Footer = () => {
               <li>
                 <a
                   href="#"
-                  className="text-slate-400 hover:text-white transition-colors"
+                  className="text-slate-400 hover:text-cyan-400 transition-colors"
                 >
                   Terms of Service
                 </a>
@@ -119,7 +119,7 @@ export const Footer = () => {
               <li>
                 <a
                   href="#"
-                  className="text-slate-400 hover:text-white transition-colors"
+                  className="text-slate-400 hover:text-cyan-400 transition-colors"
                 >
                   License
                 </a>
@@ -129,7 +129,7 @@ export const Footer = () => {
         </div>
 
         {/* Footer Bottom */}
-        <div className="border-t border-slate-800 pt-8 flex flex-col md:flex-row justify-between items-center">
+        <div className="border-t border-blue-500/30 pt-8 flex flex-col md:flex-row justify-between items-center">
           <div className="text-slate-400 text-sm">
             <p>
               © {currentYear} KK Innovations. All rights reserved.

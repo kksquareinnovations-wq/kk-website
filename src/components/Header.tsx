@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { ScrollProgressBar } from "./ScrollProgressBar";
 
 export const Header = () => {
   const handleScrollToTop = (e: React.MouseEvent<HTMLAnchorElement>) => {
@@ -9,17 +10,19 @@ export const Header = () => {
   };
 
   return (
-    <header className="sticky top-0 z-50 bg-slate-900/80 backdrop-blur border-b border-slate-700">
+    <>
+      <ScrollProgressBar />
+      <header className="sticky top-0 z-50 bg-gradient-to-b from-slate-900/90 to-slate-900/80 backdrop-blur border-b border-blue-500/30 shadow-lg shadow-cyan-500/10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo / Brand Link */}
           <Link
             href="/"
             onClick={handleScrollToTop}
-            className="flex items-center gap-2 font-bold text-xl hover:text-blue-400 transition-colors"
+            className="flex items-center gap-2 font-bold text-xl hover:text-cyan-400 transition-all duration-300 group"
           >
-            <span className="text-2xl">💡</span>
-            <span className="bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
+            <span className="text-2xl group-hover:scale-110 transition-transform">💡</span>
+            <span className="bg-gradient-to-r from-blue-400 via-cyan-400 to-blue-300 bg-clip-text text-transparent">
               KK Innovations
             </span>
           </Link>
@@ -29,32 +32,36 @@ export const Header = () => {
             <Link
               href="/"
               onClick={handleScrollToTop}
-              className="text-slate-300 hover:text-white transition-colors"
+              className="text-slate-300 hover:text-cyan-400 transition-colors relative group"
             >
               Home
+              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-400 to-cyan-400 group-hover:w-full transition-all duration-300"></span>
             </Link>
             <Link
               href="/#extensions"
-              className="text-slate-300 hover:text-white transition-colors"
+              className="text-slate-300 hover:text-cyan-400 transition-colors relative group"
             >
               Extensions
+              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-400 to-cyan-400 group-hover:w-full transition-all duration-300"></span>
             </Link>
             <Link
               href="/#about"
-              className="text-slate-300 hover:text-white transition-colors"
+              className="text-slate-300 hover:text-cyan-400 transition-colors relative group"
             >
               About
+              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-400 to-cyan-400 group-hover:w-full transition-all duration-300"></span>
             </Link>
             <Link
               href="/#contact"
-              className="text-slate-300 hover:text-white transition-colors"
+              className="text-slate-300 hover:text-cyan-400 transition-colors relative group"
             >
               Contact
+              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-400 to-cyan-400 group-hover:w-full transition-all duration-300"></span>
             </Link>
           </nav>
 
           {/* Mobile Menu Button */}
-          <button className="md:hidden text-slate-300 hover:text-white">
+          <button className="md:hidden text-slate-300 hover:text-cyan-400 transition-colors">
             <svg
               className="w-6 h-6"
               fill="none"
@@ -72,5 +79,6 @@ export const Header = () => {
         </div>
       </div>
     </header>
+    </>
   );
 };

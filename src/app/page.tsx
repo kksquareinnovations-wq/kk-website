@@ -3,8 +3,13 @@
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { ContactForm } from "@/components/ContactForm";
+import { MouseFollow3DContainer } from "@/components/MouseFollow3DContainer";
+import { useEntranceAnimation } from "@/hooks/useEntranceAnimation";
 
 export default function Home() {
+  // Trigger 3D entrance animation on page load
+  useEntranceAnimation();
+
   const currentYear = new Date().getFullYear();
 
   const extensions = [
@@ -62,8 +67,13 @@ export default function Home() {
 
       {/* Main Content */}
       <main className="flex-1">
-      <section className="mx-auto max-w-6xl px-6 py-20">
-        <div className="text-center mb-16">
+      <MouseFollow3DContainer
+        className="mx-auto max-w-6xl px-6 py-20"
+        intensity={0.3}
+        maxRotation={8}
+      >
+      <section className="text-center">
+        <div className="mb-16">
           <h1 className="text-5xl md:text-6xl font-bold text-white mb-6 leading-tight">
             Powerful Extensions for{" "}
             <span className="bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
@@ -93,6 +103,7 @@ export default function Home() {
           </div>
         </div>
       </section>
+      </MouseFollow3DContainer>
 
       {/* Extensions Grid */}
       <section id="extensions" className="mx-auto max-w-6xl px-6 py-20">

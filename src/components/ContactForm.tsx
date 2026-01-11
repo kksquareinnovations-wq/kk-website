@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { MouseFollow3DContainer } from "./MouseFollow3DContainer";
 
 interface FormData {
   name: string;
@@ -134,10 +135,15 @@ export const ContactForm = () => {
         </p>
       </div>
 
-      <form
-        onSubmit={handleSubmit}
-        className="bg-slate-800/50 backdrop-blur border border-slate-700 rounded-xl p-8 space-y-6"
+      <MouseFollow3DContainer
+        className="bg-slate-800/50 backdrop-blur border border-slate-700 rounded-xl p-8"
+        intensity={0.6}
+        maxRotation={10}
       >
+        <form
+          onSubmit={handleSubmit}
+          className="space-y-6"
+        >
         {/* Name Field */}
         <div>
           <label htmlFor="name" className="block text-white font-semibold mb-2">
@@ -259,7 +265,8 @@ export const ContactForm = () => {
             </>
           )}
         </button>
-      </form>
+        </form>
+      </MouseFollow3DContainer>
 
       <p className="text-center text-slate-400 text-sm mt-6">
         We typically respond within 24 hours.
