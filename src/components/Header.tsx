@@ -38,10 +38,10 @@ export const Header = () => {
               <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-400 to-cyan-400 group-hover:w-full transition-all duration-300"></span>
             </Link>
             <Link
-              href="/#extensions"
+              href="/#products "
               className="text-slate-300 hover:text-cyan-400 transition-colors relative group"
             >
-              Extensions
+              Products
               <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-400 to-cyan-400 group-hover:w-full transition-all duration-300"></span>
             </Link>
             <Link

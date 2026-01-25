@@ -22,7 +22,7 @@ export const Footer = () => {
               </span>
             </Link>
             <p className="text-slate-400 text-sm">
-              Professional VS Code extensions for investment tracking and market monitoring.
+              Professional products, extensions for investment tracking and market monitoring.
             </p>
           </div>
 
@@ -40,10 +40,10 @@ export const Footer = () => {
               </li>
               <li>
                 <Link
-                  href="/#extensions"
+                  href="/#products"
                   className="text-slate-400 hover:text-cyan-400 transition-colors"
                 >
-                  Extensions
+                  Products
                 </Link>
               </li>
               <li>

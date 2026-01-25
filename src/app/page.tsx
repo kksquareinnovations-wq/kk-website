@@ -5,16 +5,37 @@ import { Footer } from "@/components/Footer";
 import { ContactForm } from "@/components/ContactForm";
 import { MouseFollow3DContainer } from "@/components/MouseFollow3DContainer";
 import { useEntranceAnimation } from "@/hooks/useEntranceAnimation";
+import { useEffect } from "react";
 
 export default function Home() {
   // Trigger 3D entrance animation on page load
   useEntranceAnimation();
+
+  // Scroll to top on page load/refresh
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   const currentYear = new Date().getFullYear();
 
   const extensions = [
     {
       id: 1,
+      name: "Expiry Tracker",
+      originalName: "Accounts Expiry Tracker",
+      description:
+        "Centralized management tool designed to help teams monitor and manage the expiration dates of critical resources such as database credentials, service accounts, SSL certificates, and other time-sensitive assets.",
+      icon: "⏰",
+      features: [
+        "Visual alerts for expiring credentials",
+        "Filtering and search capabilities",
+        "Bulk management features",
+      ],
+      color: "from-purple-500 to-pink-600",
+      href: "https://github.com/kksquareinnovations-wq/accounts-expiry-tracker",
+    },
+    {
+      id: 2,
       name: "Robinhood Portfolio Balance Monitor",
       originalName: "Robinhood balance viewer",
       description:
@@ -29,7 +50,7 @@ export default function Home() {
       href: "/extensions/portfolio-balance-monitor",
     },
     {
-      id: 2,
+      id: 3,
       name: "Fidelity Investment Tracker Pro",
       originalName: "Fidelity balance viewer",
       description:
@@ -44,7 +65,7 @@ export default function Home() {
       href: "/extensions/investment-tracker-pro",
     },
     {
-      id: 3,
+      id: 4,
       name: "Market Alert System",
       originalName: "Stock alerts",
       description:
@@ -75,22 +96,22 @@ export default function Home() {
       <section className="text-center">
         <div className="mb-16">
           <h1 className="text-5xl md:text-6xl font-bold text-white mb-6 leading-tight">
-            Powerful Extensions for{" "}
+            Next-Gen Modules for {" "}
             <span className="bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
-              Financial Tracking
+              Product Development
             </span>
           </h1>
           <p className="text-xl text-slate-300 mb-8 max-w-2xl mx-auto">
-            Monitor your investments, track portfolio performance, and stay
-            informed with market alerts—all integrated directly into your
-            development environment.
+            Discover innovative products, extensions and modules for financial tracking, 
+            credential management, and much more. Powerful tools designed to enhance 
+            your development workflow with cutting-edge capabilities.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a
-              href="#extensions"
+              href="#products"
               className="px-8 py-3 bg-gradient-to-r from-blue-500 to-cyan-500 text-white rounded-lg font-semibold hover:shadow-lg hover:shadow-blue-500/50 transition"
             >
-              Explore Extensions
+              Explore Innovative Products
             </a>
             <a
               href="https://github.com/kksquareinnovations-wq"
@@ -106,12 +127,12 @@ export default function Home() {
       </MouseFollow3DContainer>
 
       {/* Extensions Grid */}
-      <section id="extensions" className="mx-auto max-w-6xl px-6 py-20">
+      <section id="products" className="mx-auto max-w-6xl px-6 py-20">
         <h2 className="text-3xl font-bold text-white mb-4 text-center">
-          Featured Extensions
+          Featured Products
         </h2>
         <p className="text-slate-300 text-center mb-12">
-          Choose the extension that fits your financial tracking needs
+          Explore our innovative products, extensions, and more tailored for your needs
         </p>
 
         <div className="grid md:grid-cols-3 gap-8">
@@ -169,7 +190,7 @@ export default function Home() {
         className="mx-auto max-w-6xl px-6 py-20 border-t border-slate-700"
       >
         <h2 className="text-3xl font-bold text-white mb-8 text-center">
-          Why Choose These Extensions?
+          Why Choose These Products?
         </h2>
         <div className="grid md:grid-cols-3 gap-8">
           <div className="text-center">
@@ -178,7 +199,7 @@ export default function Home() {
               Fast & Efficient
             </h3>
             <p className="text-slate-400">
-              Lightweight extensions that don&apos;t slow down your workflow
+              Lightweight products that don&apos;t slow down your workflow
               while providing real-time data.
             </p>
           </div>
@@ -210,9 +231,9 @@ export default function Home() {
             Support Our Non-Profit Mission
           </h2>
           <p className="text-slate-300 text-lg mb-10 max-w-2xl mx-auto">
-            We&apos;re dedicated to making financial tools accessible to
-            developers everywhere. Your support helps us continue building
-            amazing extensions and maintaining our community.
+            We&apos;re dedicated to making products and tools accessible to
+            developers everywhere. Your support helps us continue building the best,
+            amazing products and maintaining our community.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
