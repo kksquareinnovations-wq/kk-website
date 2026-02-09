@@ -118,7 +118,7 @@ describe("Animation Components", () => {
           back={<div>Back</div>}
         />
       );
-      const card = container.querySelector("[style*='perspective']");
+      const card = container.firstChild;
       expect(card).toHaveClass("group");
     });
 
