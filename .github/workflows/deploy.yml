@@ -44,6 +44,11 @@ jobs:
         run: |
           ssh-keyscan -H ${{ env.EC2_HOST }} >> ~/.ssh/known_hosts 2>/dev/null || true
 
+      - name: Create application directory on EC2
+        run: |
+          ssh ${{ env.EC2_USER }}@${{ env.EC2_HOST }} \
+            "mkdir -p ${{ env.APP_PATH }}"
+
       - name: Upload build files to EC2
         run: |
           scp -r .next ${{ env.EC2_USER }}@${{ env.EC2_HOST }}:${{ env.APP_PATH }}/
