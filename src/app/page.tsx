@@ -32,7 +32,7 @@ export default function Home() {
         "Bulk management features",
       ],
       color: "from-purple-500 to-pink-600",
-      href: "https://github.com/kksquareinnovations-wq/accounts-expiry-tracker",
+      href: "/products/accounts-expiry-tracker",
     },
     {
       id: 2,

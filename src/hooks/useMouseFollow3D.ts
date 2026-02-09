@@ -21,6 +21,16 @@ export const useMouseFollow3D = (
     const element = ref.current;
     if (!element) return;
 
+    // Do not attach mouse-follow behavior on touch / coarse-pointer devices
+    const isTouchDevice =
+      typeof window !== "undefined" &&
+      ("ontouchstart" in window || window.matchMedia?.("(pointer: coarse)")?.matches);
+    if (isTouchDevice) {
+      // ensure rotation reset and avoid adding listeners
+      setRotation({ x: 0, y: 0 });
+      return;
+    }
+
     const handleMouseMove = (event: MouseEvent) => {
       const rect = element.getBoundingClientRect();
       const centerX = rect.left + rect.width / 2;
