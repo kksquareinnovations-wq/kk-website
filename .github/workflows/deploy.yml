@@ -49,6 +49,36 @@ jobs:
           ssh ${{ env.EC2_USER }}@${{ env.EC2_HOST }} \
             "mkdir -p ${{ env.APP_PATH }}"
 
+      - name: Setup Node.js on EC2
+        run: |
+          ssh ${{ env.EC2_USER }}@${{ env.EC2_HOST }} << 'EOF'
+            # Check if nvm is already installed
+            if [ ! -d "$HOME/.nvm" ]; then
+              echo "Installing nvm..."
+              curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
+            fi
+            
+            # Load nvm
+            export NVM_DIR="$HOME/.nvm"
+            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+            
+            # Install Node.js 20 if not already installed
+            if ! nvm ls 20 &>/dev/null; then
+              echo "Installing Node.js 20..."
+              nvm install 20
+            fi
+            
+            # Use Node.js 20
+            nvm use 20
+            nvm alias default 20
+            
+            # Install PM2 globally if not already installed
+            if ! command -v pm2 &>/dev/null; then
+              echo "Installing PM2..."
+              npm install -g pm2
+            fi
+          EOF
+
       - name: Upload build files to EC2
         run: |
           scp -r .next ${{ env.EC2_USER }}@${{ env.EC2_HOST }}:${{ env.APP_PATH }}/
@@ -58,18 +88,27 @@ jobs:
 
       - name: Install dependencies on EC2
         run: |
-          ssh ${{ env.EC2_USER }}@${{ env.EC2_HOST }} \
-            "cd ${{ env.APP_PATH }} && npm ci"
+          ssh ${{ env.EC2_USER }}@${{ env.EC2_HOST }} << 'EOF'
+            export NVM_DIR="$HOME/.nvm"
+            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+            cd ${{ env.APP_PATH }} && npm ci
+          EOF
 
       - name: Grant Port 80 Access to Node
         run: |
-          ssh ${{ env.EC2_USER }}@${{ env.EC2_HOST }} \
-            "sudo setcap 'cap_net_bind_service=+ep' \$(readlink -f \$(which node))"
+          ssh ${{ env.EC2_USER }}@${{ env.EC2_HOST }} << 'EOF'
+            export NVM_DIR="$HOME/.nvm"
+            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+            sudo setcap 'cap_net_bind_service=+ep' $(readlink -f $(which node))
+          EOF
 
       - name: Restart application
         run: |
-          ssh ${{ env.EC2_USER }}@${{ env.EC2_HOST }} \
-            "cd ${{ env.APP_PATH }} && pm2 restart portfolio || pm2 start 'npm start' --name portfolio"
+          ssh ${{ env.EC2_USER }}@${{ env.EC2_HOST }} << 'EOF'
+            export NVM_DIR="$HOME/.nvm"
+            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+            cd ${{ env.APP_PATH }} && pm2 restart portfolio || pm2 start 'npm start' --name portfolio
+          EOF
 
       - name: Verify deployment
         run: |
