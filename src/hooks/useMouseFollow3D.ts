@@ -9,7 +9,7 @@ export const useMouseFollow3D = (
   options: UseMouseFollow3DOptions = {}
 ) => {
   const { intensity = 0.3, maxRotation = 20 } = options;
-  const ref = useRef<HTMLElement>(null);
+  const ref = useRef<HTMLDivElement>(null);
   
   const [rotation, setRotation] = useState({ x: 0, y: 0 });
 
