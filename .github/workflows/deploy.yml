@@ -135,8 +135,11 @@ jobs:
           
           retry_scp "scp -r .next ec2-deploy:${{ env.APP_PATH }}/"
           retry_scp "scp -r public ec2-deploy:${{ env.APP_PATH }}/"
+          retry_scp "scp -r src ec2-deploy:${{ env.APP_PATH }}/"
           retry_scp "scp package.json ec2-deploy:${{ env.APP_PATH }}/"
           retry_scp "scp package-lock.json ec2-deploy:${{ env.APP_PATH }}/ 2>/dev/null || true"
+          retry_scp "scp next.config.ts ec2-deploy:${{ env.APP_PATH }}/"
+          retry_scp "scp tsconfig.json ec2-deploy:${{ env.APP_PATH }}/"
 
       - name: Install dependencies on EC2
         run: |
