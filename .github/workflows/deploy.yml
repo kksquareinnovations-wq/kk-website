@@ -54,16 +54,21 @@ jobs:
       - name: Install dependencies on EC2
         run: |
           ssh ${{ env.EC2_USER }}@${{ env.EC2_HOST }} \
-            "cd ${{ env.APP_PATH }} && npm ci --production"
+            "cd ${{ env.APP_PATH }} && npm ci"
+
+      - name: Grant Port 80 Access to Node
+        run: |
+          ssh ${{ env.EC2_USER }}@${{ env.EC2_HOST }} \
+            "sudo setcap 'cap_net_bind_service=+ep' \$(readlink -f \$(which node))"
 
       - name: Restart application
         run: |
           ssh ${{ env.EC2_USER }}@${{ env.EC2_HOST }} \
-            "pm2 restart portfolio || pm2 start \"npm start\" --name portfolio"
+            "cd ${{ env.APP_PATH }} && pm2 restart portfolio || pm2 start 'npm start' --name portfolio"
 
       - name: Verify deployment
         run: |
-          sleep 3
+          sleep 10
           curl -f http://${{ env.EC2_HOST }} || exit 1
 
       - name: Deployment successful
