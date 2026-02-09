@@ -74,8 +74,8 @@ export async function POST(request: NextRequest) {
     const logEntry = `[${timestamp}] ${name} (${email}) - ${subject}\n`;
 
     try {
-      const fs = require("fs");
-      fs.appendFileSync(logPath, logEntry, "utf-8");
+      const { appendFile } = await import("fs/promises");
+      await appendFile(logPath, logEntry, "utf-8");
     } catch {
       // Log file write failed, but individual submission file was created
       console.warn("Failed to write to log file, but submission was saved");

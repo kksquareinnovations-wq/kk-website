@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { ExpiryTable } from "@/components/expiry-tracker/ExpiryTable";
+import Image from "next/image";
 
 export default function AccountsExpiryTracker() {
   return (
@@ -80,9 +80,11 @@ export default function AccountsExpiryTracker() {
           </p>
           <div className="bg-gradient-to-br from-slate-800 to-slate-900 border border-slate-700 rounded-xl p-6 overflow-hidden">
             <div className="relative">
-              <img 
+              <Image 
                 src="/account-management-screenshot.png"
                 alt="Account Management Dashboard Screenshot - Real-time account expiry tracking with status indicators"
+                width={800}
+                height={600}
                 className="w-full h-auto rounded-lg border border-slate-600"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-slate-900/50 to-transparent rounded-lg"></div>

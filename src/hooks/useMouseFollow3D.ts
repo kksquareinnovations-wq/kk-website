@@ -5,16 +5,12 @@ interface UseMouseFollow3DOptions {
   maxRotation?: number; // max degrees to rotate
 }
 
-interface MousePosition {
-  x: number;
-  y: number;
-}
-
 export const useMouseFollow3D = (
   options: UseMouseFollow3DOptions = {}
 ) => {
-  const { intensity = 0.5, maxRotation = 15 } = options;
-  const ref = useRef<HTMLDivElement>(null);
+  const { intensity = 0.3, maxRotation = 20 } = options;
+  const ref = useRef<HTMLElement>(null);
+  
   const [rotation, setRotation] = useState({ x: 0, y: 0 });
 
   useEffect(() => {
@@ -26,8 +22,7 @@ export const useMouseFollow3D = (
       typeof window !== "undefined" &&
       ("ontouchstart" in window || window.matchMedia?.("(pointer: coarse)")?.matches);
     if (isTouchDevice) {
-      // ensure rotation reset and avoid adding listeners
-      setRotation({ x: 0, y: 0 });
+      // For touch devices, keep rotation at 0 but don't call setState here
       return;
     }
 

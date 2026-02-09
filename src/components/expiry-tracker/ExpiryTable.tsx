@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 
 interface Account {
   id: string;
@@ -47,8 +47,6 @@ const mockAccounts: Account[] = [
 ];
 
 export const ExpiryTable = () => {
-  const [searchTerm, setSearchTerm] = useState("");
-  
   return (
     <div className="bg-gradient-to-br from-slate-800 to-slate-900 border border-slate-700 rounded-xl p-6 min-h-[600px]">
       <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between mb-6 gap-4">

@@ -24,7 +24,7 @@ export const MouseFollow3DContainer = ({
       className={`transition-transform duration-100 ease-out ${className}`}
       style={{
         transform,
-        transformStyle: "preserve-3d" as any,
+        transformStyle: "preserve-3d" as React.CSSProperties["transformStyle"],
       }}
     >
       {children}

@@ -16,8 +16,6 @@ export default function Home() {
     window.scrollTo(0, 0);
   }, []);
 
-  const currentYear = new Date().getFullYear();
-
   const extensions = [
     {
       id: 1,

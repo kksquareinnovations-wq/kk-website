@@ -29,13 +29,14 @@ export const useScrollAnimation = (
       { threshold, rootMargin: "0px 0px -100px 0px" }
     );
 
-    if (ref.current) {
-      observer.observe(ref.current);
+    const currentElement = ref.current;
+    if (currentElement) {
+      observer.observe(currentElement);
     }
 
     return () => {
-      if (ref.current) {
-        observer.unobserve(ref.current);
+      if (currentElement) {
+        observer.unobserve(currentElement);
       }
     };
   }, [threshold, triggerOnce]);

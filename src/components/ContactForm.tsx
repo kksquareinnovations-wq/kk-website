@@ -131,7 +131,7 @@ export const ContactForm = () => {
       <div className="text-center mb-12">
         <h2 className="text-4xl font-bold text-white mb-4">Get In Touch</h2>
         <p className="text-slate-300 text-lg">
-          Have questions or feedback? We'd love to hear from you!
+          Have questions or feedback? We&apos;d love to hear from you!
         </p>
       </div>
 
