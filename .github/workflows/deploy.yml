@@ -34,6 +34,31 @@ jobs:
       - name: Build Next.js project
         run: npm run build
 
+      - name: Check EC2 instance health
+        run: |
+          echo "🏥 Checking EC2 instance health..."
+          
+          # Test HTTP connection first (simpler than SSH)
+          echo "Testing HTTP connectivity..."
+          if curl -s --max-time 10 -o /dev/null -w "%{http_code}" http://${{ env.EC2_HOST }} | grep -q "200\|301\|302\|404"; then
+            echo "✅ EC2 instance is responding to HTTP requests"
+          else
+            echo "⚠️  EC2 instance is not responding to HTTP (might be normal during maintenance)"
+          fi
+          
+          # Test if port 22 is open
+          echo "Testing SSH port accessibility..."
+          timeout 10 bash -c "</dev/tcp/${{ env.EC2_HOST }}/22" 2>/dev/null
+          if [ $? -eq 0 ]; then
+            echo "✅ SSH port 22 is accessible"
+          else
+            echo "❌ SSH port 22 is not accessible - this will likely cause deployment to fail"
+            echo "🔧 Possible fixes:"
+            echo "1. Check AWS Security Group allows SSH from 0.0.0.0/0 (or GitHub IPs)"
+            echo "2. Verify EC2 instance is running"
+            echo "3. Check if Elastic IP is properly attached"
+          fi
+
       - name: Create SSH key file
         run: |
           mkdir -p ~/.ssh
@@ -48,37 +73,127 @@ jobs:
             User ${{ env.EC2_USER }}
             IdentityFile ~/.ssh/id_rsa
             StrictHostKeyChecking no
-            ServerAliveInterval 60
-            ServerAliveCountMax 3
-            ConnectTimeout 10
+            ServerAliveInterval 30
+            ServerAliveCountMax 6
+            ConnectTimeout 30
+            ConnectionAttempts 3
+            TCPKeepAlive yes
           EOF
 
       - name: Add EC2 to known_hosts
         run: |
           ssh-keyscan -H ${{ env.EC2_HOST }} >> ~/.ssh/known_hosts 2>/dev/null || true
 
-      - name: Test SSH connection
+      - name: Test network connectivity
         run: |
-          ssh ec2-deploy "echo 'SSH connection successful'"
+          echo "🔍 Testing network connectivity to EC2 instance..."
+          ping -c 3 ${{ env.EC2_HOST }} || echo "⚠️  Ping failed, but SSH might still work"
+          nc -zv ${{ env.EC2_HOST }} 22 || echo "⚠️  Port 22 not reachable via nc"
+
+      - name: Test SSH connection with retries
+        run: |
+          echo "🔐 Testing SSH connection..."
+          for i in {1..3}; do
+            echo "Attempt $i/3"
+            if ssh ec2-deploy "echo 'SSH connection successful on attempt $i'"; then
+              echo "✅ SSH connection established"
+              break
+            else
+              echo "❌ SSH attempt $i failed"
+              if [ $i -eq 3 ]; then
+                echo "🚨 All SSH attempts failed"
+                exit 1
+              fi
+              sleep 10
+            fi
+          done
 
       - name: Upload build files to EC2
         run: |
-          scp -r .next ec2-deploy:${{ env.APP_PATH }}/
-          scp -r public ec2-deploy:${{ env.APP_PATH }}/
-          scp package.json ec2-deploy:${{ env.APP_PATH }}/
-          scp package-lock.json ec2-deploy:${{ env.APP_PATH }}/ 2>/dev/null || true
+          echo "📤 Uploading build files to EC2..."
+          
+          # Create retry function for scp operations
+          retry_scp() {
+            local max_attempts=3
+            local attempt=1
+            while [ $attempt -le $max_attempts ]; do
+              echo "Upload attempt $attempt/$max_attempts"
+              if eval "$1"; then
+                echo "✅ Upload successful"
+                return 0
+              else
+                echo "❌ Upload attempt $attempt failed"
+                if [ $attempt -eq $max_attempts ]; then
+                  echo "🚨 All upload attempts failed"
+                  return 1
+                fi
+                sleep 5
+                ((attempt++))
+              fi
+            done
+          }
+          
+          retry_scp "scp -r .next ec2-deploy:${{ env.APP_PATH }}/"
+          retry_scp "scp -r public ec2-deploy:${{ env.APP_PATH }}/"
+          retry_scp "scp package.json ec2-deploy:${{ env.APP_PATH }}/"
+          retry_scp "scp package-lock.json ec2-deploy:${{ env.APP_PATH }}/ 2>/dev/null || true"
 
       - name: Install dependencies on EC2
         run: |
           echo "🔧 Installing production dependencies on EC2..."
-          ssh ec2-deploy "cd ${{ env.APP_PATH }} && npm ci --omit=dev" || \
-          ssh ec2-deploy "cd ${{ env.APP_PATH }} && npm install --production" || \
-          ssh ec2-deploy "cd ${{ env.APP_PATH }} && npm install --only=production"
+          
+          # Retry function for SSH commands
+          retry_ssh() {
+            local max_attempts=3
+            local attempt=1
+            while [ $attempt -le $max_attempts ]; do
+              echo "SSH command attempt $attempt/$max_attempts: $1"
+              if ssh ec2-deploy "$1"; then
+                echo "✅ SSH command successful"
+                return 0
+              else
+                echo "❌ SSH command attempt $attempt failed"
+                if [ $attempt -eq $max_attempts ]; then
+                  echo "🚨 All SSH command attempts failed"
+                  return 1
+                fi
+                sleep 5
+                ((attempt++))
+              fi
+            done
+          }
+          
+          retry_ssh "cd ${{ env.APP_PATH }} && npm ci --omit=dev" || \
+          retry_ssh "cd ${{ env.APP_PATH }} && npm install --production" || \
+          retry_ssh "cd ${{ env.APP_PATH }} && npm install --only=production"
           echo "✅ Dependencies installed successfully"
 
       - name: Restart application
         run: |
-          ssh ec2-deploy "pm2 restart portfolio || pm2 start 'npm start' --name portfolio"
+          echo "🔄 Restarting application on EC2..."
+          
+          # Retry function for SSH commands
+          retry_ssh() {
+            local max_attempts=3
+            local attempt=1
+            while [ $attempt -le $max_attempts ]; do
+              echo "SSH command attempt $attempt/$max_attempts: $1"
+              if ssh ec2-deploy "$1"; then
+                echo "✅ SSH command successful"
+                return 0
+              else
+                echo "❌ SSH command attempt $attempt failed"
+                if [ $attempt -eq $max_attempts ]; then
+                  echo "🚨 All SSH command attempts failed"
+                  return 1
+                fi
+                sleep 5
+                ((attempt++))
+              fi
+            done
+          }
+          
+          retry_ssh "pm2 restart portfolio || pm2 start 'npm start' --name portfolio"
 
       - name: Verify deployment
         run: |
@@ -93,4 +208,17 @@ jobs:
 
       - name: Notify on failure
         if: failure()
-        run: echo "❌ Deployment failed! Check the logs above."
+        run: |
+          echo "❌ Deployment failed! Check the logs above."
+          echo ""
+          echo "🔍 Troubleshooting steps:"
+          echo "1. Check EC2 instance status in AWS console"
+          echo "2. Verify security group allows SSH (port 22) from GitHub Actions IPs"
+          echo "3. Ensure EC2 instance is running and accessible"
+          echo "4. Check if SSH key is correctly configured in GitHub secrets"
+          echo "5. Verify Elastic IP (${{ env.EC2_HOST }}) is attached to the instance"
+          echo ""
+          echo "💡 Common solutions:"
+          echo "- Restart EC2 instance if it's unresponsive"
+          echo "- Check AWS security group rules for port 22"
+          echo "- Verify EC2 instance has sufficient resources (memory, disk)"
