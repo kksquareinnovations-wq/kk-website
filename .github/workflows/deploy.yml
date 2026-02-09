@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
 
 env:
-  EC2_HOST: 18.218.150.24
+  EC2_HOST: 18.117.84.247
   EC2_USER: ec2-user
   APP_PATH: /home/ec2-user/extension-portfolio
 
