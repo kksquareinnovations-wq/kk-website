@@ -39,31 +39,50 @@ jobs:
           mkdir -p ~/.ssh
           echo "${{ secrets.EC2_SSH_KEY }}" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
+          
+      - name: Configure SSH settings
+        run: |
+          cat >> ~/.ssh/config << EOF
+          Host ec2-deploy
+            HostName ${{ env.EC2_HOST }}
+            User ${{ env.EC2_USER }}
+            IdentityFile ~/.ssh/id_rsa
+            StrictHostKeyChecking no
+            ServerAliveInterval 60
+            ServerAliveCountMax 3
+            ConnectTimeout 10
+          EOF
 
       - name: Add EC2 to known_hosts
         run: |
           ssh-keyscan -H ${{ env.EC2_HOST }} >> ~/.ssh/known_hosts 2>/dev/null || true
 
+      - name: Test SSH connection
+        run: |
+          ssh ec2-deploy "echo 'SSH connection successful'"
+
       - name: Upload build files to EC2
         run: |
-          scp -r .next ${{ env.EC2_USER }}@${{ env.EC2_HOST }}:${{ env.APP_PATH }}/
-          scp -r public ${{ env.EC2_USER }}@${{ env.EC2_HOST }}:${{ env.APP_PATH }}/
-          scp package.json ${{ env.EC2_USER }}@${{ env.EC2_HOST }}:${{ env.APP_PATH }}/
-          scp package-lock.json ${{ env.EC2_USER }}@${{ env.EC2_HOST }}:${{ env.APP_PATH }}/ 2>/dev/null || true
+          scp -r .next ec2-deploy:${{ env.APP_PATH }}/
+          scp -r public ec2-deploy:${{ env.APP_PATH }}/
+          scp package.json ec2-deploy:${{ env.APP_PATH }}/
+          scp package-lock.json ec2-deploy:${{ env.APP_PATH }}/ 2>/dev/null || true
 
       - name: Install dependencies on EC2
         run: |
-          ssh ${{ env.EC2_USER }}@${{ env.EC2_HOST }} \
-            "cd ${{ env.APP_PATH }} && npm ci --production"
+          echo "🔧 Installing production dependencies on EC2..."
+          ssh ec2-deploy "cd ${{ env.APP_PATH }} && npm ci --omit=dev" || \
+          ssh ec2-deploy "cd ${{ env.APP_PATH }} && npm install --production" || \
+          ssh ec2-deploy "cd ${{ env.APP_PATH }} && npm install --only=production"
+          echo "✅ Dependencies installed successfully"
 
       - name: Restart application
         run: |
-          ssh ${{ env.EC2_USER }}@${{ env.EC2_HOST }} \
-            "pm2 restart portfolio || pm2 start \"npm start\" --name portfolio"
+          ssh ec2-deploy "pm2 restart portfolio || pm2 start 'npm start' --name portfolio"
 
       - name: Verify deployment
         run: |
-          sleep 3
+          sleep 5
           curl -f http://${{ env.EC2_HOST }} || exit 1
 
       - name: Deployment successful
